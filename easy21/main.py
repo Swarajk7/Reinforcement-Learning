@@ -1,14 +1,11 @@
 from env import Easy21Env
+from monte_carlo_control import MonteCarloGLIEControl
+from plot_graphs import plot_value_func
 import numpy as np
+
 if __name__ == '__main__':
     env = Easy21Env()
-    done = False
-    cnt = 0
-    state = env.reset()
-    print(state)
-    while not done:
-        action = np.random.choice([0, 1], p=[0.85,0.15])
-        state, reward, done = env.step(action)
-        print(action, state, reward, done)
-        cnt += 1
-    print("Count: ", cnt)
+    
+    mc_glie = MonteCarloGLIEControl(env, 100, 1)
+    mc_glie.train(50000)
+    plot_value_func(mc_glie.get_values())

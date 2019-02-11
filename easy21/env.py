@@ -31,7 +31,10 @@ class Easy21Env(gym.Env):
         # observation_space or state space is represented by 2 values.
         # Player's sum and Dealer's sum
         # each of the sum can take values between 0-21
-        self.observation_space = spaces.MultiDiscrete([21, 21])
+        # Even if dealer card can go upto 21, it is part of environment,
+        # so instead of 21, we can just make is 1-10 to show what is intial dealer card.
+        # (player_sum, dealer)
+        self.observation_space = spaces.MultiDiscrete([22, 11])
         self.deck = Deck()
         self.reset()
 
